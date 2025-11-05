@@ -1,0 +1,272 @@
+/* --- 基本重置和全局设置 --- */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, body {
+    height: 100%;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    overflow: hidden; /* 防止页面滚动 */
+}
+
+body {
+    /* 使用您指定的背景图 */
+    background-image: url('./img/background.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    color: #FFFFFF;
+}
+
+/* --- 页面切换逻辑 --- */
+.page {
+    width: 100%;
+    height: 100vh;
+    padding: 2rem;
+    display: none; /* 默认隐藏所有页面 */
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.page.active {
+    display: flex; /* 只显示激活的页面 */
+}
+
+/* --- 基础排版 --- */
+h1 {
+    font-size: 3.5rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.2);
+}
+
+h2 {
+    font-size: 2.5rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+}
+
+h3 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+}
+
+p {
+    font-size: 1.1rem;
+    color: rgba(255, 255, 255, 0.85);
+    max-width: 600px;
+    line-height: 1.6;
+}
+
+/* --- 核心组件：毛玻璃模态框/卡片 --- */
+.modal {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px); /* 兼容 Safari */
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 20px;
+    padding: 2rem;
+}
+
+.modal-small {
+    width: 100%;
+    max-width: 500px;
+}
+
+.modal-large {
+    width: 100%;
+    max-width: 700px;
+}
+
+/* --- 核心组件：按钮 --- */
+.btn {
+    padding: 1rem 2.5rem;
+    border: none;
+    border-radius: 50px;
+    font-size: 1.1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.btn:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+}
+
+.btn-primary {
+    background-color: #F200A2; /* 亮粉色 */
+    color: white;
+}
+
+.btn-secondary {
+    background-color: #00C2F2; /* 亮蓝色 */
+    color: white;
+}
+
+/* --- 页面 1: 欢迎页 --- */
+#page-welcome p {
+    margin-bottom: 2rem;
+    font-size: 1.25rem;
+}
+
+/* --- 页面 2: 输入名字 --- */
+#page-step1-name input {
+    width: 100%;
+    background: transparent;
+    border: none;
+    border-bottom: 2px solid rgba(255, 255, 255, 0.7);
+    color: white;
+    font-size: 1.5rem;
+    padding: 0.5rem;
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+#page-step1-name input::placeholder {
+    color: rgba(255, 255, 255, 0.7);
+    font-weight: 300;
+}
+
+#page-step1-name input:focus {
+    outline: none;
+    border-bottom-color: white;
+}
+
+/* --- 页面 3: 选择模式 --- */
+#page-step1-mode p {
+    margin-bottom: 2rem;
+}
+
+.mode-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 2rem;
+}
+
+.mode-card {
+    width: 300px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.mode-card img {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    margin-bottom: 1rem;
+    background-color: rgba(255, 255, 255, 0.2); /* 占位符背景 */
+}
+
+/* --- 页面 4: 选择 Avatar --- */
+.avatar-tabs {
+    display: flex;
+    justify-content: center;
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.avatar-tab {
+    font-size: 1.5rem;
+    font-weight: 500;
+    color: rgba(255, 255, 255, 0.6);
+    padding-bottom: 0.5rem;
+    cursor: pointer;
+    transition: color 0.2s;
+}
+
+.avatar-tab.active {
+    color: white;
+    border-bottom: 3px solid white;
+}
+
+.avatar-grid {
+    display: none; /* 默认隐藏 */
+    grid-template-columns: repeat(5, 1fr);
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+    max-height: 300px;
+    overflow-y: auto; /* 如果头像多，可以滚动 */
+}
+
+.avatar-grid.active {
+    display: grid; /* 激活时显示 */
+}
+
+.avatar-item {
+    cursor: pointer;
+    transition: transform 0.2s;
+    border-radius: 50%;
+}
+
+.avatar-item img {
+    width: 100%;
+    border-radius: 50%;
+    background-color: rgba(255, 255, 255, 0.2); /* 占位符背景 */
+}
+
+.avatar-item:hover {
+    transform: scale(1.1);
+}
+
+.avatar-item.selected {
+    border: 4px solid #F200A2;
+    box-shadow: 0 0 10px #F200A2;
+}
+
+/* --- 页面 5: 选择心情 (水平滚动) --- */
+.mood-container-wrapper {
+    width: 100%;
+    max-width: 90vw; /* 限制最大宽度 */
+    overflow-x: auto; /* 关键：允许水平滚动 */
+    padding-bottom: 1rem; /* 为滚动条留出空间 */
+}
+
+/* 隐藏滚动条样式 */
+.mood-container-wrapper::-webkit-scrollbar {
+    display: none;
+}
+.mood-container-wrapper {
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
+}
+
+.mood-container {
+    display: flex; /* 关键：让子元素水平排列 */
+    gap: 1.5rem;
+    padding: 2rem 1rem;
+    min-width: max-content; /* 关键：让容器宽度由内容决定 */
+}
+
+.mood-card {
+    width: 220px;
+    flex-shrink: 0; /* 防止卡片被压缩 */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.mood-card img {
+    width: 100px;
+    height: 100px;
+    margin-bottom: 1rem;
+    object-fit: contain;
+}
+
+.mood-card h3 {
+    font-size: 1.8rem;
+}
+
+.mood-card p {
+    font-size: 0.9rem;
+    height: 60px; /* 固定高度防止布局跳动 */
+    margin-bottom: 1.5rem;
+}

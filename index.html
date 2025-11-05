@@ -1,7 +1,128 @@
 <!DOCTYPE html>
-<html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HealNova - 疗愈原型</title>
+    <link rel="stylesheet" href="style.css">
+</head>
 <body>
-<h1>Hello World</h1>
-<p>I'm hosted with GitHub Pages.</p>
+
+    <main>
+        <section class="page active" id="page-welcome">
+            <div class="content-block">
+                <h1>Welcome To HealNova</h1>
+                <p>A virtual healing space where you can be yourself, speak freely, and recharge your mental well-being through innovative, emotion-soothing experiences.</p>
+                <button class="btn btn-primary" id="btn-welcome-enter">Enter</button>
+            </div>
+        </section>
+
+        <section class="page" id="page-step1-name">
+            <h2>Step 01 : Select Mode</h2>
+            <div class="modal modal-small">
+                <input type="text" id="username-input" placeholder="Enter Your Username In HealNova">
+                <button class="btn btn-primary" id="btn-name-confirm">Confirm</button>
+            </div>
+        </section>
+
+        <section class="page" id="page-step1-mode">
+            <h2>Step 01 : Select Mode</h2>
+            <p>Choose freely whether you want to show your name or anonymous in HealNova.<br>Don't worry—this setting can be changed later.</p>
+            <div class="mode-container">
+                <div class="modal mode-card">
+                    <img src="./img/avatar_named.png" alt="Name Display Mode">
+                    <h3>Name Display Mode</h3>
+                    <button class="btn btn-primary btn-select-mode">Select</button>
+                </div>
+                <div class="modal mode-card">
+                    <img src="./img/avatar_anon.png" alt="Anonymous Mode">
+                    <h3>Anonymous Mode</h3>
+                    <button class="btn btn-secondary btn-select-mode">Select</button>
+                </div>
+            </div>
+        </section>
+
+        <section class="page" id="page-step2-avatar">
+            <h2>Step 02 : Choose Avatar</h2>
+            <p>Choose your avatar</p>
+            <div class="modal modal-large">
+                <div class="avatar-tabs">
+                    <span class="avatar-tab active" data-target="grid-girl">Girl</span>
+                    <span class="avatar-tab" data-target="grid-boy">Boy</span>
+                </div>
+                
+                <div class="avatar-grid active" id="grid-girl">
+                    <div class="avatar-item"><img src="./img/avatars/girl_01.png" alt="Avatar"></div>
+                    <div class="avatar-item"><img src="./img/avatars/girl_02.png" alt="Avatar"></div>
+                    <div class="avatar-item"><img src="./img/avatars/girl_03.png" alt="Avatar"></div>
+                    <div class="avatar-item"><img src="./img/avatars/girl_04.png" alt="Avatar"></div>
+                    <div class="avatar-item"><img src="./img/avatars/girl_05.png" alt="Avatar"></div>
+                    <div class="avatar-item"><img src="./img/avatars/girl_06.png" alt="Avatar"></div>
+                    <div class="avatar-item"><img src="./img/avatars/girl_07.png" alt="Avatar"></div>
+                    <div class="avatar-item"><img src="./img/avatars/girl_08.png" alt="Avatar"></div>
+                    <div class="avatar-item"><img src="./img/avatars/girl_09.png" alt="Avatar"></div>
+                    <div class="avatar-item"><img src="./img/avatars/girl_10.png" alt="Avatar"></div>
+                </div>
+
+                <div class="avatar-grid" id="grid-boy">
+                    <div class="avatar-item"><img src="./img/avatars/boy_01.png" alt="Avatar"></div>
+                    <div class="avatar-item"><img src="./img/avatars/boy_02.png" alt="Avatar"></div>
+                    <div class="avatar-item"><img src="./img/avatars/boy_03.png" alt="Avatar"></div>
+                    <div class="avatar-item"><img src="./img/avatars/boy_04.png" alt="Avatar"></div>
+                    <div class="avatar-item"><img src="./img/avatars/boy_05.png" alt="Avatar"></div>
+                    <div class="avatar-item"><img src="./img/avatars/boy_06.png" alt="Avatar"></div>
+                    <div class="avatar-item"><img src="./img/avatars/boy_07.png" alt="Avatar"></div>
+                    <div class="avatar-item"><img src="./img/avatars/boy_08.png" alt="Avatar"></div>
+                    <div class="avatar-item"><img src="./img/avatars/boy_09.png" alt="Avatar"></div>
+                    <div class="avatar-item"><img src="./img/avatars/boy_10.png" alt="Avatar"></div>
+                </div>
+
+                <button class="btn btn-primary" id="btn-avatar-confirm">Confirm</button>
+            </div>
+        </section>
+
+        <section class="page" id="page-step3-mood">
+            <h2>Step 03 : Mood State</h2>
+            <p>Choose your mood state for today</p>
+            
+            <div class="mood-container-wrapper">
+                <div class="mood-container">
+                    <div class="modal mood-card">
+                        <img src="./img/moods/tornado.png" alt="Tornado">
+                        <h3>Tornado</h3>
+                        <p>Chaos, Loss of Control, Anxiety, Fear, or Rage</p>
+                        <button class="btn btn-primary btn-mood-select">Select</button>
+                    </div>
+                    <div class="modal mood-card">
+                        <img src="./img/moods/rainy.png" alt="Rainy">
+                        <h3>Rainy</h3>
+                        <p>Calmness, Melancholy, Nostalgia, or Relief</p>
+                        <button class="btn btn-primary btn-mood-select">Select</button>
+                    </div>
+                    <div class="modal mood-card">
+                        <img src="./img/moods/sunny.png" alt="Sunny">
+                        <h3>Sunny</h3>
+                        <p>Happy, Warm, Optimistic and Bright</p>
+                        <button class="btn btn-primary btn-mood-select">Select</button>
+                    </div>
+                    <div class="modal mood-card">
+                        <img src="./img/moods/thundery.png" alt="Thundery">
+                        <h3>Thundery</h3>
+                        <p>Fear, Tension, Depression, or Shock</p>
+                        <button class="btn btn-primary btn-mood-select">Select</button>
+                    </div>
+                    <div class="modal mood-card">
+                        <img src="./img/moods/snowy.png" alt="Snowy">
+                        <h3>Snowy</h3>
+                        <p>Tranquility, loneliness, purity, or anticipation</p>
+                        <button class="btn btn-primary btn-mood-select">Select</button>
+                    </div>
+                    </div>
+            </div>
+        </section>
+
+    </main>
+
+    <script src="script.js"></script>
 </body>
 </html>
