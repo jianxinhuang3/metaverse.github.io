@@ -6,7 +6,7 @@ from PIL import Image
 
 # 1. 设置你的PNG图片所在的目录
 #    （请确保使用正斜杠 '/'，即使在Windows上）
-INPUT_DIR = Path("E:\\github\\metaverse.github.io\\img\\avatars\\girl")
+INPUT_DIR = Path("E:\\github\\metaverse.github.io\\img\\tmp")
 
 # 2. 设置压缩后图片的输出目录
 OUTPUT_DIR = Path("E:\\github\\metaverse.github.io\\out")
