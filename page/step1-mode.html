@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HealNova - 选择模式</title>
+    <link rel="stylesheet" href="../style.css">
+</head>
+<body>
+    <main>
+        <section class="page active" id="page-step1-mode">
+            <h2>Step 01 : Select Mode</h2>
+            <p>Choose freely whether you want to show your name or anonymous in HealNova.<br>Don't worry—this setting can be changed later.</p>
+            <div class="mode-container">
+                <div class="modal mode-card">
+                    <img src="../img/avatars/girl/Girl 01.png" alt="Name Display Mode">
+                    <h3>Name Display Mode</h3>
+                    <button class="btn btn-primary btn-select-mode" data-mode="named">Select</button>
+                </div>
+                <div class="modal mode-card">
+                    <img src="../img/avatars/boy/1.png" alt="Anonymous Mode">
+                    <h3>Anonymous Mode</h3>
+                    <button class="btn btn-secondary btn-select-mode" data-mode="anonymous">Select</button>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const modeSelectButtons = document.querySelectorAll('.btn-select-mode');
+            modeSelectButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    const mode = button.dataset.mode;
+                    localStorage.setItem('displayMode', mode);
+                    window.location.href = 'step2-avatar.html';
+                });
+            });
+        });
+    </script>
+</body>
+</html>

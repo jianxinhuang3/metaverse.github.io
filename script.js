@@ -1,5 +1,65 @@
+// 用户信息管理
+const UserInfo = {
+    init() {
+        this.addUserInfoToAllPages();
+        this.updateUserInfo();
+    },
+
+    // 添加用户信息显示区域到所有页面
+    addUserInfoToAllPages() {
+        const userInfoHTML = `
+            <div class="user-info">
+                <span class="username">游客</span>
+                <div class="avatar-container">
+                    <span class="placeholder">头像</span>
+                </div>
+                <div class="mood-container">
+                    <span class="placeholder">心情</span>
+                </div>
+            </div>
+        `;
+        document.body.insertAdjacentHTML('afterbegin', userInfoHTML);
+    },
+
+    // 更新用户信息显示
+    updateUserInfo() {
+        const username = localStorage.getItem('username') || '陈大文';
+        const avatarSrc = localStorage.getItem('selectedAvatar');
+        const mood = localStorage.getItem('selectedMood');
+
+        // 更新用户名
+        const usernameElement = document.querySelector('.user-info .username');
+        if (usernameElement) {
+            usernameElement.textContent = username;
+        }
+
+        // 更新头像
+        const avatarContainer = document.querySelector('.user-info .avatar-container');
+        if (avatarContainer) {
+            if (avatarSrc) {
+                avatarContainer.innerHTML = `<img src="${avatarSrc}" alt="Avatar">`;
+            } else {
+                avatarContainer.innerHTML = `<span class="placeholder">头像</span>`;
+            }
+        }
+
+        // 更新心情
+        const moodContainer = document.querySelector('.user-info .mood-container');
+        if (moodContainer) {
+            if (mood) {
+                const moodImage = `../img/moods/${mood.charAt(0).toUpperCase() + mood.slice(1)}.png`;
+                moodContainer.innerHTML = `<img src="${moodImage}" alt="Mood">`;
+            } else {
+                moodContainer.innerHTML = `<span class="placeholder">心情</span>`;
+            }
+        }
+    }
+};
+
 // 等待 DOM 内容加载完毕后再执行脚本
 document.addEventListener("DOMContentLoaded", () => {
+    // 初始化用户信息显示
+    UserInfo.init();
 
     // --- 帮助函数：用于切换页面 ---
     function showPage(pageId) {
@@ -19,7 +79,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const btnWelcomeEnter = document.getElementById('btn-welcome-enter');
     if (btnWelcomeEnter) {
         btnWelcomeEnter.addEventListener('click', () => {
-            showPage('page-step1-name');
+            window.location.href = 'step1-name.html';
         });
     }
 
@@ -27,22 +87,25 @@ document.addEventListener("DOMContentLoaded", () => {
     const btnNameConfirm = document.getElementById('btn-name-confirm');
     if (btnNameConfirm) {
         btnNameConfirm.addEventListener('click', () => {
-            // 你可以在这里获取用户名: 
-            // const username = document.getElementById('username-input').value;
-            // console.log('Username:', username);
-            showPage('page-step1-mode');
+            const username = document.getElementById('username-input').value;
+            if (username.trim()) {
+                localStorage.setItem('username', username);
+                UserInfo.updateUserInfo(); // 更新显示
+                // window.location.href = 'step1-mode.html';
+                window.location.href = 'step2-avatar.html';
+            } else {
+                alert('请输入用户名');
+            }
         });
     }
 
-    // --- 页面 3 (选择模式) -> 页面 4 (选择Avatar) ---
-    const modeSelectButtons = document.querySelectorAll('.btn-select-mode');
-    modeSelectButtons.forEach(button => {
-        button.addEventListener('click', () => {
-            // 你可以在这里区分用户选了哪个模式
-            // console.log('Mode selected');
-            showPage('page-step2-avatar');
-        });
-    });
+    // // --- 页面 3 (选择模式) -> 页面 4 (选择Avatar) ---
+    // const modeSelectButtons = document.querySelectorAll('.btn-select-mode');
+    // modeSelectButtons.forEach(button => {
+    //     button.addEventListener('click', () => {
+    //         window.location.href = 'step2-avatar.html';
+    //     });
+    // });
 
     // --- 页面 4 (选择Avatar) 内部逻辑 ---
     
@@ -83,13 +146,14 @@ document.addEventListener("DOMContentLoaded", () => {
     const btnAvatarConfirm = document.getElementById('btn-avatar-confirm');
     if (btnAvatarConfirm) {
         btnAvatarConfirm.addEventListener('click', () => {
-            // 你可以在这里检查用户是否已选择 avatar
-            // const selectedAvatar = document.querySelector('.avatar-item.selected');
-            // if (!selectedAvatar) {
-            //     alert('请选择一个头像');
-            //     return;
-            // }
-            showPage('page-step3-mood');
+            const selectedAvatar = document.querySelector('.avatar-item.selected img');
+            if (selectedAvatar) {
+                localStorage.setItem('selectedAvatar', selectedAvatar.src);
+                UserInfo.updateUserInfo(); // 更新显示
+                window.location.href = 'step3-mood.html';
+            } else {
+                alert('请选择一个头像');
+            }
         });
     }
 
@@ -97,11 +161,12 @@ document.addEventListener("DOMContentLoaded", () => {
     const moodSelectButtons = document.querySelectorAll('.btn-mood-select');
     moodSelectButtons.forEach(button => {
         button.addEventListener('click', () => {
-            // 原型流程结束
-            // 在实际项目中，这里会进入主应用界面
-            alert('原型演示结束。');
-            // 或者跳回第一页
-            // showPage('page-welcome');
+            const mood = button.dataset.mood;
+            localStorage.setItem('selectedMood', mood);
+            UserInfo.updateUserInfo(); // 更新显示
+            alert('原型演示结束。\n用户名: ' + localStorage.getItem('username') +
+                  '\n头像: ' + localStorage.getItem('selectedAvatar') +
+                  '\n心情: ' + mood);
         });
     });
 });
