@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HealNova - Step 02 偏好设置</title>
+    <link rel="stylesheet" href="../style.css">
+</head>
+<body>
+    <main>
+        <section class="page active" id="page-step2-info">
+            <h2>Step 02 : Public Info Preferences</h2>
+            <p>Choose freely whether you want to show your name or anonymous in HealNova.<br>Don't worry—this setting can be changed later.</p>
+            
+            <div class="modal modal-large">
+                <div class="info-container">
+                    <div class="info-inputs">
+                        <h3><span class="sparkle">✦</span> Registe Info</h3>
+                        
+                        <div class="input-group">
+                            <label for="realname-input">Real name</label>
+                            <input type="text" id="realname-input" placeholder="Please enter in your real name">
+                        </div>
+                        <div class="input-group">
+                            <label for="nickname-input">Nickname</label>
+                            <input type="text" id="nickname-input" placeholder="Please enter your nickname">
+                        </div>
+                        <div class="input-group">
+                            <label for="age-input">Age</label>
+                            <input type="text" id="age-input" placeholder="Please enter your age">
+                        </div>
+                    </div>
+
+                    <div class="info-mode">
+                        <div class="selected-avatar-preview">
+                            <span class="placeholder">Avatar</span>
+                        </div>
+                        <h3>Mode Selection</h3>
+                        <p class="small-text">Select the mode when you enter Heal Nova</p>
+                        
+                        <div class="radio-group">
+                            <label class="radio-item">
+                                <input type="radio" name="mode-selection" value="anonymous" checked>
+                                <span class="radio-label">Anonymous</span>
+                            </label>
+                            <label class="radio-item">
+                                <input type="radio" name="mode-selection" value="realname">
+                                <span class="radio-label">Realname</span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <button class="btn btn-primary" id="btn-info-confirm">Confirm</button>
+            </div>
+        </section>
+    </main>
+    <script src="../script.js"></script>
+</body>
+</html>

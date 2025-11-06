@@ -282,13 +282,24 @@ p {
     padding-bottom: 1rem; /* 为滚动条留出空间 */
 }
 
-/* 隐藏滚动条样式 */
+/* 自定义滚动条样式 */
 .mood-container-wrapper::-webkit-scrollbar {
-    display: none;
+    height: 8px; /* 滚动条高度 */
+}
+.mood-container-wrapper::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.1); /* 轨道背景 */
+    border-radius: 4px;
+}
+.mood-container-wrapper::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.5); /* 滑块颜色 */
+    border-radius: 4px;
+}
+.mood-container-wrapper::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 255, 255, 0.7); /* 悬停时颜色 */
 }
 .mood-container-wrapper {
-    -ms-overflow-style: none; /* IE and Edge */
-    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: auto; /* IE and Edge 显示滚动条 */
+    scrollbar-width: auto; /* Firefox 显示滚动条 */
 }
 
 .mood-container {
@@ -320,4 +331,326 @@ p {
     font-size: 0.9rem;
     height: 60px; /* 固定高度防止布局跳动 */
     margin-bottom: 1.5rem;
+}
+
+/* --- 页面 6: Step 4 - Heal Nova --- */
+
+.nova-tabs {
+    display: flex;
+    justify-content: flex-start; /* 从左侧开始 */
+    gap: 1.5rem;
+    margin-bottom: 1.5rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    padding: 0 1rem; /* 左右留一点边距 */
+}
+
+.nova-tab {
+    font-size: 1.1rem; /* 字体小一点 */
+    font-weight: 500;
+    color: rgba(255, 255, 255, 0.6);
+    padding-bottom: 0.75rem;
+    cursor: pointer;
+    transition: color 0.2s;
+}
+
+.nova-tab.active {
+    color: white;
+    border-bottom: 3px solid #F200A2; /* 粉色高亮 */
+}
+
+/* 新增：水平滚动容器的包装器 */
+.nova-scroll-wrapper {
+    display: none; /* 默认隐藏，由 JS 控制 */
+    width: 100%;
+    overflow-x: auto; /* 允许水平滚动 */
+    padding-bottom: 1rem; /* 为滚动条留出空间 */
+}
+
+
+/* 激活的滚动器 */
+.nova-scroll-wrapper.active {
+    display: block;
+}
+
+/* 自定义滚动条样式 */
+.nova-scroll-wrapper::-webkit-scrollbar {
+    height: 8px; /* 滚动条高度 */
+}
+.nova-scroll-wrapper::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.1); /* 轨道背景 */
+    border-radius: 4px;
+}
+.nova-scroll-wrapper::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.5); /* 滑块颜色 */
+    border-radius: 4px;
+}
+.nova-scroll-wrapper::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 255, 255, 0.7); /* 悬停时颜色 */
+}
+.nova-scroll-wrapper {
+    -ms-overflow-style: auto; /* IE and Edge 显示滚动条 */
+    scrollbar-width: auto; /* Firefox 显示滚动条 */
+}
+
+/* 新增：内部 flex 容器 */
+.nova-scroll-container {
+    display: flex; /* 让子元素水平排列 */
+    gap: 1.5rem;
+    padding: 1rem 0.5rem; /* 内部留白 */
+    min-width: max-content; /* 关键：让容器宽度由内容决定 */
+}
+
+/* 新增：场景卡片 */
+.nova-card {
+    width: 280px; /* 卡片宽度 */
+    flex-shrink: 0; /* 防止卡片被压缩 */
+    cursor: pointer;
+    transition: transform 0.2s;
+    border-radius: 15px; /* 图片圆角 */
+    overflow: hidden; /* 裁剪图片 */
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.nova-card:hover {
+    transform: scale(1.03);
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+}
+
+.nova-card img {
+    width: 100%;
+    height: 180px; /* 固定图片高度 */
+    object-fit: cover;
+    display: block;
+}
+
+.nova-card h4 {
+    font-size: 1.2rem;
+    font-weight: 500;
+    color: white;
+    padding: 1rem;
+    text-align: center;
+    background-color: rgba(0, 0, 0, 0.1); /* 底部轻微暗色背景 */
+}
+
+
+
+.nova-grid-container {
+    width: 100%;
+    max-height: 400px; /* 限制高度 */
+    overflow-y: auto; /* 超出则滚动 */
+}
+
+.nova-grid {
+    display: none; /* 默认隐藏 */
+    grid-template-columns: repeat(2, 1fr); /* 每行 2 个 */
+    gap: 1.5rem;
+    padding: 0.5rem;
+}
+
+.nova-grid.active {
+    display: grid; /* 激活时显示 */
+}
+
+.nova-item {
+    cursor: pointer;
+    transition: transform 0.2s;
+    border-radius: 15px; /* 图片圆角 */
+    overflow: hidden; /* 裁剪图片 */
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.nova-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.nova-item:hover {
+    transform: scale(1.03);
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+}
+
+
+/* --- 页面 2 (新): Step 2 - Info Preferences --- */
+
+.info-container {
+    display: flex;
+    flex-wrap: wrap; /* 移动端换行 */
+    gap: 1.5rem;
+    width: 100%;
+    margin-bottom: 2rem;
+}
+
+.info-inputs {
+    flex: 1.5; /* 左侧占稍多空间 */
+    min-width: 250px;
+    text-align: left;
+    padding-right: 1.5rem;
+    border-right: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.info-inputs h3 {
+    font-size: 1.3rem;
+    margin-bottom: 1.5rem;
+}
+
+.sparkle {
+    color: #f0f0f0;
+    margin-right: 0.5rem;
+}
+
+.input-group {
+    margin-bottom: 1.5rem;
+}
+
+.input-group label {
+    display: block;
+    font-size: 1.1rem;
+    font-weight: 500;
+    color: rgba(255, 255, 255, 0.9);
+    margin-bottom: 0.5rem;
+}
+
+.input-group input[type="text"] {
+    width: 100%;
+    background: transparent;
+    border: none;
+    border-bottom: 2px solid rgba(255, 255, 255, 0.7);
+    color: white;
+    font-size: 1.1rem;
+    padding: 0.5rem 0.2rem;
+}
+
+.input-group input[type="text"]::placeholder {
+    color: rgba(255, 255, 255, 0.5);
+    font-weight: 300;
+}
+
+.input-group input[type="text"]:focus {
+    outline: none;
+    border-bottom-color: white;
+}
+
+.info-mode {
+    flex: 1;
+    min-width: 200px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.selected-avatar-preview {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.1);
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    margin-bottom: 1rem;
+}
+
+.selected-avatar-preview img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.info-mode h3 {
+    font-size: 1.3rem;
+    margin-bottom: 0.2rem;
+}
+
+.small-text {
+    font-size: 0.9rem;
+    color: rgba(255, 255, 255, 0.7);
+    margin-bottom: 1rem;
+}
+
+.radio-group {
+    width: 100%;
+    max-width: 200px;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    text-align: left;
+}
+
+.radio-item {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    font-size: 1.1rem;
+    cursor: pointer;
+}
+
+.radio-item input[type="radio"] {
+    /* 自定义 radio 按钮 */
+    appearance: none;
+    -webkit-appearance: none;
+    width: 20px;
+    height: 20px;
+    border: 2px solid rgba(255, 255, 255, 0.7);
+    border-radius: 50%;
+    background-color: transparent;
+    transition: all 0.2s;
+}
+
+.radio-item input[type="radio"]:checked {
+    background-color: #F200A2;
+    border-color: #F200A2;
+}
+
+.radio-item input[type="radio"]:checked::after {
+    content: '';
+    display: block;
+    width: 8px;
+    height: 8px;
+    background: white;
+    border-radius: 50%;
+    margin: 4px; /* (20-8)/2 - 2px border */
+}
+
+/* --- 页面 7: Step 5 - Healing Space --- */
+.healing-space-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    max-width: 800px;
+}
+
+#healing-video {
+    width: 100%;
+    max-width: 700px;
+    height: auto;
+    border-radius: 15px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+    margin-bottom: 2rem;
+}
+
+.healing-controls {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+}
+
+/* 响应式调整 */
+@media (max-width: 600px) {
+    .info-container {
+        flex-direction: column;
+    }
+    .info-inputs {
+        border-right: none;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+        padding-right: 0;
+        padding-bottom: 1.5rem;
+    }
+    .info-mode {
+        padding-left: 0;
+    }
 }
