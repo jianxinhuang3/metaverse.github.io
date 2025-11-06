@@ -5,9 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>HealNova - 疗愈空间</title>
     <link rel="stylesheet" href="../style.css">
-    <script src="../script.js"></script>
 </head>
-<body>
+<body class="page-healing-background">
     <main>
         <section class="page active" id="page-step5-healing">
             <h2>Step 05 : Healing Space</h2>
@@ -20,10 +19,36 @@
                 </video>
 
                 <div class="healing-controls">
-                    <button id="btn-exit-healing" class="btn btn-secondary">Exit Space</button>
+                    <button id="btn-show-exit-modal" class="btn btn-secondary">Exit Space</button>
                 </div>
             </div>
         </section>
     </main>
+
+    <div class="modal-overlay" id="modal-overlay"></div>
+
+    <div class="modal modal-popup" id="exit-confirm-modal">
+        <h2>Exit Nova</h2>
+        <p>Sure to launch Zen Space?</p>
+        <button class="btn btn-primary" id="btn-exit-confirm">Confirm</button>
+        <button class="btn btn-dismiss" id="btn-exit-dismiss">Dismiss</button>
+    </div>
+
+    <div class="modal modal-popup" id="mood-update-modal">
+        <h2>How are your feeling ?</h2>
+        <div class="mood-grid-popup">
+            <div class="mood-item-popup" data-mood="tornado"><img src="../img/moods/Tornado.png" alt="Tornado"></div>
+            <div class="mood-item-popup" data-mood="rainy"><img src="../img/moods/Rainy.png" alt="Rainy"></div>
+            <div class="mood-item-popup" data-mood="sunny"><img src="../img/moods/Sunny.png" alt="Sunny"></div>
+            <div class="mood-item-popup" data-mood="thundery"><img src="../img/moods/Thundery.png" alt="Thundery"></div>
+            <div class="mood-item-popup" data-mood="snowy"><img src="../img/moods/Snowy.png" alt="Snowy"></div>
+            <!-- <div class="mood-item-popup" data-mood="cloudy"><img src="../img/moods/Cloudy.png" alt="Cloudy"></div>
+            <div class="mood-item-popup" data-mood="star"><img src="../img/moods/Stars.png" alt="Star"></div>
+            <div class="mood-item-popup" data-mood="moon"><img src="../img/moods/Moon.png" alt="Moon"></div> -->
+        </div>
+        <button class="btn btn-primary" id="btn-mood-confirm">Confirm</button>
+    </div>
+
+    <script src="../script.js"></script>
 </body>
 </html>

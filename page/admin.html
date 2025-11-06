@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HealNova - Admin Dashboard</title>
+    <link rel="stylesheet" href="../style.css">
+</head>
+<body class="admin-page">
+    <main>
+        <section class="page active" id="page-admin-dashboard">
+            <div class="admin-dashboard">
+
+                <header class="admin-header">
+                    <h2>Data Monitoring And Analysis</h2>
+                </header>
+                <div class="psychologist-info">
+                    <img src="../img/admin/psychologist_avatar.png" alt="Psychologist">
+                </div>
+                <aside class="student-list-container modal">
+                    </aside>
+                <aside class="student-list-container modal">
+                    <h3>Student List</h3>
+                    <ul class="student-list">
+                        <li><img src="../img/avatars/boy/Boy 01.png" alt="Andy"><span>Andy</span></li>
+                        <li class="active"><img src="../img/avatars/boy/Boy 02.png" alt="Jacky"><span>Jacky</span></li>
+                        <li><img src="../img/avatars/boy/Boy 03.png" alt="Iris"><span>Iris</span></li>
+                        <li><img src="../img/avatars/boy/Boy 04.png" alt="Jacky"><span>Jacky</span></li>
+                        <li><img src="../img/avatars/boy/Boy 05.png" alt="Pony"><span>Pony</span></li>
+                        <li><img src="../img/avatars/boy/Boy 06.png" alt="Alice"><span>Alice</span></li>
+                        <li><img src="../img/avatars/boy/Boy 07.png" alt="Jack"><span>Jack</span></li>
+                        <li><img src="../img/avatars/boy/Boy 08.png" alt="Mery"><span>Mery</span></li>
+                        <li><img src="../img/avatars/boy/Boy 09.png" alt="Ben"><span>Ben</span></li>
+                        <li><img src="../img/avatars/boy/Boy 10.png" alt="Pony"><span>Pony</span></li>
+                    </ul>
+                </aside>
+
+                <section class="admin-profile-card modal">
+                    <img src="../img/avatars/boy/Boy 02.png" alt="Jacky">
+                    <div class="profile-details">
+                        <span class="name">Jacky</span>
+                        <span class="meta">13 Years Old</span>
+                        <span class="meta">Boy</span>
+                    </div>
+                </section>
+
+                <section class="admin-card modal" id="admin-chart-emotional">
+                    <h4>Emotional Data</h4>
+                    <img src="../img/admin/placeholder_chart_emotional.png" alt="Emotional Data Chart" class="chart-placeholder">
+                </section>
+
+                <section class="admin-card modal" id="admin-chart-activities">
+                    <h4>Activities Data</h4>
+                    <div class="activity-bars">
+                        <div class="activity-group">
+                            <span class="group-title">Calming Space</span>
+                            <div class="bar"><span class="label">Walking</span><div class="bar-inner" style="width: 100%;">10</div></div>
+                            <div class="bar"><span class="label">Meditation</span><div class="bar-inner" style="width: 30%;">3</div></div>
+                            <div class="bar"><span class="label">Reading</span><div class="bar-inner" style="width: 50%;">5</div></div>
+                        </div>
+                        <div class="activity-group">
+                            <span class="group-title">Energetic Space</span>
+                            <div class="bar"><span class="label">Diving</span><div class="bar-inner" style="width: 20%;">2</div></div>
+                            <div class="bar"><span class="label">Sky-diving</span><div class="bar-inner" style="width: 2%;">0</div></div>
+                            <div class="bar"><span class="label">Whack-a-mole</span><div class="bar-inner" style="width: 50%;">5</div></div>
+                        </div>
+                        <div class="activity-group">
+                            <span class="group-title">Connection Space</span>
+                            <div class="bar"><span class="label">Pet healing</span><div class="bar-inner" style="width: 70%;">7</div></div>
+                            <div class="bar"><span class="label">Chatroom</span><div class="bar-inner" style="width: 40%;">4</div></div>
+                        </div>
+                        <div class="activity-group">
+                            <span class="group-title">Musical Space</span>
+                            <div class="bar"><span class="label">Music Master</span><div class="bar-inner" style="width: 20%;">2</div></div>
+                            <div class="bar"><span class="label">Music Forest</span><div class="bar-inner" style="width: 40%;">4</div></div>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="admin-card modal log-card" id="admin-log-text">
+                    <h4>Text log</h4>
+                    <div class="log-column">
+                        <strong>Negative(130):</strong>
+                        <p>Hurt(10),Hate(10),Sick(8),Disgusting(12),Boring(20),Mean,Up(27),Loser(5),Weak(12),Annoying(40),Lonely(33),Stressful(35),Terrible(4)</p>
+                    </div>
+                    <div class="log-column">
+                        <strong>Optimistic(50):</strong>
+                        <p>Love(8),Fun(1),Delightful(3),Nail It(1),Win(4),Chill(6),Relaxing(8),Good(12),Great(8),Amazing(4),Happy(3),Appreciate(4),Enjoy(8)</p>
+                    </div>
+                </section>
+
+                <section class="admin-card modal log-card" id="admin-log-act">
+                    <h4>Act log</h4>
+                    <div class="log-column">
+                        <strong>Negative Activities(2):</strong>
+                        <ul>
+                            <li>Kick the bottle or finger after losing game.</li>
+                            <li>Lashed out at the furniture when she was upset.</li>
+                        </ul>
+                    </div>
+                    <div class="log-column">
+                        <strong>Optimistic Activities(2):</strong>
+                        <ul>
+                            <li>Comforted friends after loss.</li>
+                            <li>Share tools with virtual friends.</li>
+                        </ul>
+                    </div>
+                </section>
+
+                <section class="admin-card modal ai-strategies">
+                    <h4>AI Strategies</h4>
+                    
+                    <strong>Psychological State</strong>
+                    <ul>
+                        <li>High Negative Emotions (Loneliness, Stress, Irritation) With Frequent Impulsive Behaviors (E.G., Hitting Furniture).</li>
+                        <li>Relies On Sensory Activities (Whack-A-Mole) And Social Interaction (Chatrooms) To Cope, But Lacks Systematic Emotional Regulation.</li>
+                    </ul>
+
+                    <strong>Recommendations For Psychologist</strong>
+                    <ol>
+                        <li>Emotion & Behavior Management: Train In Emotion Recognition And Delayed Response (E.G., Mindfulness Exercises) To Reduce Impulsive Acts.</li>
+                        <li>Activity Adjustment: Increase Calming Activities (Meditation, Reading) While Leveraging Her Social Empathy (E.G., Peer Support Groups).</li>
+                        <li>Cognitive Intervention: Use CBT To Address Negative Thoughts (E.G., “I’m always alone”) And Explore Stressors (Academic/Family) For Targeted Support.</li>
+                    </ol>
+                </section>
+
+            </div>
+        </section>
+    </main>
+    <script src="../script.js"></script>
+</body>
+</html>

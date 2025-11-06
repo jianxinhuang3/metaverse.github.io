@@ -8,6 +8,12 @@
 html, body {
     height: 100%;
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    background-attachment: fixed; /* <-- 新增这一行 */
+    /* overflow: hidden; */ /* <-- MODIFICATION: 移除全局溢出隐藏 */
+}
+
+/* MODIFICATION: 仅在非管理员页面上隐藏滚动条 */
+body:not(.admin-page) {
     overflow: hidden; /* 防止页面滚动 */
 }
 
@@ -247,6 +253,7 @@ p {
     margin-bottom: 2rem;
     max-height: 300px;
     overflow-y: auto; /* 如果头像多，可以滚动 */
+    padding: 0.5rem;
 }
 
 .avatar-grid.active {
@@ -255,7 +262,8 @@ p {
 
 .avatar-item {
     cursor: pointer;
-    transition: transform 0.2s;
+    transition: transform 0.2s, border-color 0.2s, box-shadow 0.2s;
+    border: 4px solid transparent;
     border-radius: 50%;
 }
 
@@ -272,6 +280,7 @@ p {
 .avatar-item.selected {
     border: 4px solid #F200A2;
     box-shadow: 0 0 10px #F200A2;
+    transform: scale(1.1);
 }
 
 /* --- 页面 5: 选择心情 (水平滚动) --- */
@@ -653,4 +662,476 @@ p {
     .info-mode {
         padding-left: 0;
     }
+}
+
+
+/* --- 页面 7: Step 5 - Healing Space (新增样式) --- */
+
+/* 疗愈空间专属背景 */
+body.page-healing-background {
+    background-image: url('./img/background.png'); 
+    background-size: cover;
+    background-position: center;
+}
+
+/* --- 
+  新增：弹窗遮罩层 
+--- */
+.modal-overlay {
+    display: none; /* 默认隐藏 */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5); /* 半透明黑色 */
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+    z-index: 2000; /* 确保在最上层 */
+}
+
+.modal-overlay.active {
+    display: block; /* 激活时显示 */
+}
+
+/* --- 
+  新增：通用弹窗样式 
+--- */
+.modal-popup {
+    display: none; /* 默认隐藏 */
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 90%;
+    max-width: 450px;
+    z-index: 2001; /* 确保在遮罩层之上 */
+    text-align: center;
+    padding: 2.5rem; /* 增加内边距 */
+}
+
+.modal-popup.active {
+    display: block; /* 激活时显示 */
+}
+
+.modal-popup h2 {
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 1.5rem;
+}
+
+.modal-popup p {
+    font-size: 1.1rem;
+    color: rgba(255, 255, 255, 0.8);
+    margin-bottom: 2rem;
+}
+
+/* 退出确认弹窗的按钮 */
+#exit-confirm-modal .btn-primary {
+    width: 100%; /* 按钮同宽 */
+    margin-bottom: 0.75rem;
+}
+
+/* 新增：Dismiss 按钮样式 */
+.btn-dismiss {
+    padding: 1rem 2.5rem;
+    border: none;
+    border-radius: 50px;
+    font-size: 1.1rem;
+    font-weight: bold;
+    cursor: pointer;
+    background-color: transparent;
+    color: rgba(255, 255, 255, 0.7);
+    width: 100%;
+    transition: background-color 0.2s, color 0.2s;
+}
+
+.btn-dismiss:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    color: white;
+}
+
+/* --- 
+  新增：心情更新弹窗 
+--- */
+.mood-grid-popup {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); /* 4列布局 */
+    gap: 1.5rem;
+    margin-bottom: 2.5rem;
+    max-width: 350px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.mood-item-popup {
+    width: 100%;
+    aspect-ratio: 1 / 1; /* 保持方形 */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 15px;
+    background: rgba(255, 255, 255, 0.1);
+    border: 2px solid transparent;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.mood-item-popup img {
+    width: 70%;
+    height: 70%;
+    object-fit: contain;
+}
+
+.mood-item-popup:hover {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+.mood-item-popup.selected {
+    border-color: #F200A2; /* 粉色选中框 */
+    background: rgba(255, 255, 255, 0.2);
+    transform: scale(1.05);
+}
+
+#mood-update-modal .btn-primary {
+    width: 100%;
+}
+
+/* --- 
+  页面 8: Admin Dashboard 
+--- */
+
+#page-admin-dashboard {
+    padding: 2rem;
+    padding-top: 80px; /* 为右上角头像留出空间 */
+    justify-content: flex-start; /* 顶部对齐 */
+    align-items: center;
+}
+
+.admin-dashboard {
+    display: grid;
+    grid-template-areas:
+        "header   header   header   header"
+        "sidebar  profile  chart1   log1"
+        "sidebar  chart2   chart2   log2"
+        "sidebar  main     main     main";
+    grid-template-columns: 250px 1fr 1fr 1fr;
+    grid-template-rows: auto auto auto 1fr;
+    gap: 1.5rem;
+    width: 100%;
+    max-width: 1600px;
+    height: calc(100vh - 100px); /* 占据剩余高度 */
+    position: relative;
+}
+
+/* --- Grid 区域 --- */
+
+.admin-header {
+    grid-area: header;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.5rem;
+}
+
+.admin-header h2 {
+    font-size: 2.5rem;
+    font-weight: 700;
+}
+
+/* MODIFICATION: 修复心理咨询师头像样式 */
+/* 新规则 1: 定位 .psychologist-info 容器本身 */
+.psychologist-info {
+    position: absolute; /* 脱离文档流 */
+    
+    /* -- 定位到 Text Log (log1) 区域 -- */
+    /* grid-column: 4; (log1 在第4列) */
+    /* grid-row: 2; (log1 在第2行) */
+    /* 更简单的方式：直接用 'right' 定位 */
+    
+    right: 1.5rem; /* (1600px max-width - 250px sidebar) / 3 = ~450px per col */
+                    /* 2.5rem padding + 1.5rem gap ( approx) */
+                    /* 简单起见，我们直接对齐到右侧 */
+                    /* 我们知道 log1 是最后一列，所以我们定位到右侧 */
+    
+    /* 抓取 log1 列的起始位置 */
+    /* (250px + 1fr + 1fr + 1.5rem gap * 2) ... 
+        ...这太复杂了。我们用一个简单的方法： */
+
+    /* log1 在第4列，我们用grid-area把它放进去 */
+    grid-area: log1;
+    justify-self: end; /* 容器对齐到单元格右侧 */
+    align-self: start; /* 容器对齐到单元格顶部 */
+    
+    /* 向上平移，使其紧贴 Text log 框的顶部 */
+    /* "图1" 中头像的底部大致在框顶部，所以我们上移约 90-100% */
+    transform: translateY(-90%);
+
+    /* -- 图层控制 -- */
+    /* 目标：背景(0) < 头像(1) < 磨砂框(2) */
+    z-index: 1;
+}
+
+/* 新规则 2: 设置头像图片本身的样式 */
+.psychologist-info img {
+    width: auto;
+    height: 160px; /* 调整为你希望的高度 */
+    border-radius: 0;
+    border: none;
+    object-fit: contain;
+}
+
+.student-list-container {
+    grid-area: sidebar;
+    height: 100%;
+    overflow-y: auto;
+}
+
+.admin-profile-card {
+    grid-area: profile;
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+.admin-card {
+    grid-area: main; /* 默认为 main，可被覆盖 */
+        padding: 1.5rem;
+        position: relative; /* <-- 必须：创建堆叠上下文 */
+        z-index: 2; /* <-- 新增：确保在 z-index: 1 的头像之上 */
+}
+
+.admin-card h4 {
+    font-size: 1.3rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+    color: white;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    padding-bottom: 0.5rem;
+}
+
+/* --- Grid 区域覆盖 --- */
+#page-admin-dashboard .modal {
+    padding: 1.5rem; /* 统一 admin 内部卡片 padding */
+}
+
+.admin-card[grid-area="chart1"] { grid-area: chart1; }
+.admin-card[grid-area="chart2"] { grid-area: chart2; }
+.admin-card[grid-area="log1"] { grid-area: log1; }
+.admin-card[grid-area="log2"] { grid-area: log2; }
+.ai-strategies { grid-area: main; }
+
+/* --- 侧边栏 --- */
+.student-list-container h3 {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    padding-bottom: 0.75rem;
+}
+
+.student-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.student-list li {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 0.75rem 1rem;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.student-list li:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.student-list li.active {
+    background-color: #F200A2; /* 粉色高亮 */
+    font-weight: bold;
+}
+
+.student-list img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+}
+
+/* --- 用户资料卡 --- */
+.admin-profile-card img {
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+}
+.admin-profile-card .profile-details {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+}
+.admin-profile-card .name {
+    font-size: 1.8rem;
+    font-weight: 600;
+}
+.admin-profile-card .meta {
+    font-size: 1rem;
+    color: rgba(255, 255, 255, 0.8);
+    background: rgba(255, 255, 255, 0.1);
+    padding: 0.25rem 0.5rem;
+    border-radius: 5px;
+    align-self: flex-start; /* 让标签自适应宽度 */
+}
+
+/* --- 图表卡片 --- */
+.chart-placeholder {
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+    border-radius: 10px;
+}
+
+/* --- 活动数据卡片 --- */
+.activity-bars {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+.activity-group .group-title {
+    font-size: 1rem;
+    font-weight: 500;
+    color: rgba(255, 255, 255, 0.9);
+    margin-bottom: 0.5rem;
+    display: block;
+}
+.bar {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 0.5rem;
+}
+.bar .label {
+    width: 80px;
+    font-size: 0.9rem;
+    color: rgba(255, 255, 255, 0.8);
+    flex-shrink: 0;
+}
+.bar .bar-inner {
+    height: 20px;
+    background-color: #F200A2;
+    border-radius: 10px;
+    color: white;
+    font-size: 0.8rem;
+    padding: 0 0.5rem;
+    line-height: 20px;
+    text-align: right;
+    min-width: 20px; /* 至少显示数字 */
+}
+
+/* --- 日志卡片 --- */
+.log-card {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    font-size: 0.9rem;
+    line-height: 1.6;
+}
+.log-card .log-column strong {
+    color: white;
+    margin-bottom: 0.25rem;
+    display: block;
+}
+.log-card .log-column p {
+    font-size: 0.9rem;
+    color: rgba(255, 255, 255, 0.8);
+    text-align: left; /* MODIFICATION: 确保文本左对齐 */
+    word-wrap: break-word; /* MODIFICATION: 确保长文本换行 */
+}
+.log-card .log-column ul {
+    list-style-position: inside;
+    padding-left: 0.5rem;
+    color: rgba(255, 255, 255, 0.8);
+    text-align: left; /* MODIFICATION: 确保列表左对齐 */
+}
+
+/* --- AI 策略卡片 --- */
+.ai-strategies {
+    font-size: 1rem;
+    line-height: 1.7;
+}
+.ai-strategies strong {
+    font-size: 1.1rem;
+    color: white;
+    display: block;
+    margin-top: 1rem;
+    margin-bottom: 0.5rem;
+}
+.ai-strategies ul, .ai-strategies ol {
+    padding-left: 1.5rem;
+    color: rgba(255, 255, 255, 0.9);
+    text-align: left; /* MODIFICATION: 确保列表左对齐 */
+}
+.ai-strategies ol {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+/* --- 
+  管理员页面 (admin.html) 专属覆盖 
+--- */
+
+/* 1. 允许 admin 页面垂直滚动 */
+body.admin-page {
+    height: auto;
+    overflow-y: auto !important; /* 强制覆盖 'overflow: hidden' */
+    overflow-x: hidden;
+}
+
+body.admin-page .page {
+    height: auto; /* 移除 100vh 限制 */
+    min-height: 100vh; /* 确保至少占满一屏 */
+}
+
+/* MODIFICATION: 删除了 "2. 重新定义 admin-dashboard..." 整个 CSS 规则。
+   这将使页面自动回退到文件
+   中定义的 4 列网格布局 (grid-template-areas: "header header header header" ...)，
+   这正是 "图1" 所展示的布局。
+*/
+
+
+/* 3. 将 admin.html 中新增的 ID 分配到 grid 区域 */
+#admin-chart-emotional {
+    grid-area: chart1;
+}
+#admin-chart-activities {
+    grid-area: chart2;
+}
+#admin-log-text {
+    grid-area: log1;
+}
+#admin-log-act {
+    grid-area: log2;
+}
+
+/* 4. (可选) 确保日志卡片等高，以获得 '图2' 的整洁外观 */
+#admin-log-text,
+#admin-log-act {
+    height: 100%;
+}
+
+/* --- 
+  新增：Admin 页面磨砂样式覆盖 
+--- */
+body.admin-page .modal {
+    /* * 目标: 加深紫色调，提高不透明度
+     * 原: rgba(255, 255, 255, 0.1) - 10%不透明的白色
+     * 新: rgba(75, 60, 110, 0.35) - 35%不透明的深紫色
+     */
+    background: rgba(75, 60, 110, 0.35);
+    
+    /* 也可以让边框稍微暗一些，与新背景匹配 */
+    border: 1px solid rgba(255, 255, 255, 0.15);
 }
