@@ -270,7 +270,7 @@ document.addEventListener("DOMContentLoaded", () => {
             // *** 修正：补全所有视频映射 ***
             const videoMapping = {
                 // Calming
-                'Mushroom Forest': 'Calming- walking adventure.mp4',
+                'Forest': 'Calming- walking adventure.mp4',
                 'Meditation': 'Calming-Meditation.mp4',
                 'Reading': 'Calming-reading.mp4',
                 // Energetic
